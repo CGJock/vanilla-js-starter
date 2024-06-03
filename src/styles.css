@@ -1,0 +1,10 @@
+.contenedorPrincipal{
+    height: 200px;
+    width: 400px;
+    border: solid red 1px;
+}
+.contenedorTareas{
+    background-color: red;
+    width: 300px;
+    height: 30px;
+}
