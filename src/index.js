@@ -15,23 +15,27 @@ let inputTarea = document.getElementById("inputTarea")
 // } 
 // getTask()
 btnAgreagar.addEventListener("click", function () {
-    asyncPostCall = async () => {
+    asyncPostCall = async () => {//funcion que hace un llamado al api
         try {
             const response = await fetch('http://localhost:3000/api/todo', {
-             method: 'POST',
+             method: 'POST',//aca se especifica el methodo a usar en el api
              headers: {
                'Content-Type': 'application/json'
                },
                body: JSON.stringify({
-                // your expected POST request payload goes here
+                // el body va a ser igual a un objeto
                         title: inputTarea.value,
 
                        })
-         // your expected POST request payload goes her
+                       
+      
              });
-             const data = await response.json();
-          // enter you logic when the fetch is successful
-             console.log(data);
+             const data = await response.json();//data que contiene la respuesta del servidor 
+             data.forEach(element => {
+              console.log(element.title)
+              return element.title
+             });
+      
            } catch(error) {
          // enter your logic for when there is an error (ex. error toast)
     
@@ -42,3 +46,4 @@ btnAgreagar.addEventListener("click", function () {
 })
 
 
+elem
