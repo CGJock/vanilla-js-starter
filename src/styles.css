@@ -1,5 +1,5 @@
 .contenedorPrincipal{
-    height: 200px;
+    height: 300px;
     width: 400px;
     border: solid red 1px;
 }
@@ -10,7 +10,11 @@
     width: 300px;
     height: 30px;
 }
-
-.icon {
-    width: 35px;
+.contendorInputContador{
+    display: flex;
 }
+.icon{
+    width: 36px;
+    height: 36px;
+}
+
