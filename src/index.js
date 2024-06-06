@@ -8,7 +8,7 @@ try {
          body: JSON.stringify({
 
            tarea: tarea,
-           estado: 'incompleto'
+           estado: "incompleto"
       
           })
        });
@@ -53,7 +53,7 @@ try {
        } 
   }
 
-  const putTask = async(id,estado) => {
+  const putTask = async(id,estadoTarea) => {
     try {
       const response = await fetch(`http://localhost:3000/api/todo/${id}`, {
        method: 'PUT',
@@ -63,9 +63,10 @@ try {
          body: JSON.stringify({
 
            
-           estado: estado
+           estado: estadoTarea
       
           })
+          
        });
        const data = await response.json()
        return data
