@@ -17,7 +17,7 @@ try {
      } catch(error) {
 
 
-        console.log(error)
+        alert("error")
        } 
   }
 
@@ -53,17 +53,17 @@ try {
        } 
   }
 
-  const putTask = async(tarea) => {
+  const putTask = async(id,estado) => {
     try {
-      const response = await fetch('http://localhost:3000/api/todo', {
+      const response = await fetch(`http://localhost:3000/api/todo/${id}`, {
        method: 'PUT',
        headers: {
          'Content-Type': 'application/json'
          },
          body: JSON.stringify({
 
-           tarea: tarea,
-           estado: incompleta
+           
+           estado: estado
       
           })
        });
