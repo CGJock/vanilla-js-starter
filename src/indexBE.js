@@ -7,8 +7,8 @@ let parrafo = document.getElementById("contadorTexto")
 
 let contador = 0
 
-let conte = localStorage.getItem("contador")
-contador = conte
+// let conte = localStorage.getItem("contador")
+// contador = conte
 console.log(contador)
 
 parrafo.innerHTML=contador
@@ -39,6 +39,28 @@ async function obtenerTareas() {
       checkbox.checked = false
     }
 
+
+    checkbox.onclick = function agregarContador() {
+    
+    if (checkbox.checked == true) {
+      contador++
+      // localStorage.setItem("contador",contador)
+      parrafo.innerHTML = contador
+    }else if(checkbox.checked == false){
+      contador--
+      // localStorage.setItem("contador",contador)
+      parrafo.innerHTML = contador
+    }
+    if(checkbox.checked == true){
+            estadoTarea = "completo"
+          }else if(checkbox.checked == false){
+            estadoTarea = "incompleto"
+          }
+      
+   putTask(checkbox.id, estadoTarea)
+   
+    }
+
       console.log(element.id)
       console.log(element.tarea)
       console.log(element.estado)
@@ -49,25 +71,25 @@ async function obtenerTareas() {
     
    //funcion que va a utilizr un put para actualizar la data
    
-    checkbox.addEventListener("click", () => {
+    // checkbox.addEventListener("click", () => {
     
-    if (checkbox.checked == true) {
-      contador++
-      localStorage.setItem("contador",contador)
-      parrafo.innerHTML = contador
-    }else if(checkbox.checked == false){
-      contador--
-      localStorage.setItem("contador",contador)
-      parrafo.innerHTML = contador
-    }
-    if(checkbox.checked == true){
-            estadoTarea = "completo"
-          }else if(checkbox.checked == false){
-            estadoTarea = "incompleto"
-          }
+  //   if (checkbox.checked == true) {
+  //     contador++
+  //     localStorage.setItem("contador",contador)
+  //     parrafo.innerHTML = contador
+  //   }else if(checkbox.checked == false){
+  //     contador--
+  //     localStorage.setItem("contador",contador)
+  //     parrafo.innerHTML = contador
+  //   }
+  //   if(checkbox.checked == true){
+  //           estadoTarea = "completo"
+  //         }else if(checkbox.checked == false){
+  //           estadoTarea = "incompleto"
+  //         }
       
-   putTask(checkbox.id, estadoTarea)//se debe meter el addevent listener dentro de la funcion
-   });
+  //  putTask(checkbox.id, estadoTarea)//se debe meter el addevent listener dentro de la funcion
+  //  });
 /////////////////////////////////////////////////////////////////////
     let tarea = document.createElement("p");
     tarea.innerHTML = element.tarea;//el valor interno de tarea va a ser igual a la iteracion del elemento
@@ -77,6 +99,8 @@ async function obtenerTareas() {
     icon.class = "icon"
     icon.addEventListener("click", () => {
       delTask(contenedor.id)//se debe meter el addevent listener dentro de la funcion 
+      contador--
+      getTask()
     });
 
     contenedor.appendChild(checkbox);
@@ -90,35 +114,65 @@ async function obtenerTareas() {
 
 obtenerTareas()
 
-//funcion que para agregar las tareas usando el input 
-btnAgreagar.addEventListener("click", function addTask() {
-  if (inputTarea.value.trim() == "") {
-    alert("se debe ingresar texto");
-  } else {
-    // let contenedor = document.createElement("div");
-    // contenedor.className = "contenedorTareas";//se se da ese classname para poder editarlo 
-
-    // let checkbox = document.createElement("input");//creacion de un imput checkbox
-    // checkbox.type = "checkbox";
-    // checkbox.id = "checkbox";
-  
+//funcion que para agregar las tareas usando el input
 
 
-    let tarea = document.createElement("p");//crea una eqtiqueta p
-    tarea.innerHTML = inputTarea.value;//le va dar un valor al inner la etiqueta p
+function addTask() {
+ 
+   let inputTarea = document.getElementById("inputTarea");
+
+   if (inputTarea.value.trim() == "") {
+     alert("se debe ingresar texto");
+   } else {
+     // let contenedor = document.createElement("div");
+     // contenedor.className = "contenedorTareas";//se se da ese classname para poder editarlo 
+ 
+     // let checkbox = document.createElement("input");//creacion de un imput checkbox
+     // checkbox.type = "checkbox";
+     // checkbox.id = "checkbox";
+   
+
+ 
+     let tarea = document.createElement("p");//crea una eqtiqueta p
+     tarea.innerHTML = inputTarea.value;//le va dar un valor al inner la etiqueta p
+     
+ 
+     // let icon = document.createElement("img");
+     // icon.src = "http://localhost:1234/compartimiento.97bc848e.png";
+     // icon.class = "icon";
+ 
+     // contenedor.appendChild(checkbox);//le ingresa un checbox a los contenedores
+     // contenedor.appendChild(tarea);//le agrega el valor del input al contenedor "p"
+     // contenedor.appendChild(icon);
+     // contenedorPrincipal.appendChild(contenedor);
+ 
+     postTask(inputTarea.value);
+     
+     
+     inputTarea.value = ""//Devuelve el valor de input a "vacio"
+     
+ 
     
+     
+      
+ 
+   }
+ }
 
-    // let icon = document.createElement("img");
-    // icon.src = "http://localhost:1234/compartimiento.97bc848e.png";
-    // icon.class = "icon";
+btnAgreagar.addEventListener("click",function () {
+  addTask()
 
-    // contenedor.appendChild(checkbox);//le ingresa un checbox a los contenedores
-    // contenedor.appendChild(tarea);//le agrega el valor del input al contenedor "p"
-    // contenedor.appendChild(icon);
-    // contenedorPrincipal.appendChild(contenedor);
+ 
+})
 
-    postTask(inputTarea.value);
-    inputTarea.value = ""//Devuelve el valor de input a "vacio"
+inputTarea.addEventListener("keydown",function (event) {
+  if(event.keyCode == 13){
+
+ 
+   addTask()
   }
-});
+  
+})
+
+
 

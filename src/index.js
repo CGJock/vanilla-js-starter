@@ -13,7 +13,9 @@ try {
           })
        });
        const data = await response.json()
-       window.location.reload()
+       
+      window.location.reload()
+       
      } catch(error) {
 
 
@@ -23,7 +25,9 @@ try {
 
   const getTask  = async() => {
     try{
+      
       const response = await fetch('http://localhost:3000/api/todo');
+      
       const data = await response.json()
       
       return data
@@ -45,7 +49,7 @@ try {
        });
        const data = response.json()//obtiene la data convertida a json
        window.location.reload()//se recarga cada vez que la pagina se recarga
-       return data
+       
       
      } catch(error) {
       
@@ -69,7 +73,7 @@ try {
           
        });
        const data = await response.json()
-       return data
+       
        
      } catch(error) {
 
