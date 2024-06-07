@@ -4,6 +4,7 @@ let inputTarea = document.getElementById("inputTarea");
 let btnAgreagar = document.getElementById("btnAgregar");
 let contenedorPrincipal = document.getElementById("contenedorPrincipal");
 let parrafo = document.getElementById("contadorTexto")
+let mensajeTareas = document.getElementById("mensajeTareas")
 
 let contador = 0
 
@@ -11,7 +12,6 @@ let contador = 0
 // contador = conte
 console.log(contador)
 
-parrafo.innerHTML=contador
 
 
 
@@ -33,33 +33,37 @@ async function obtenerTareas() {
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";//bloque de codigo que crea el checkbox
     checkbox.id = element.id;
+    if (contenedorPrincipal.innerHTML != '') {
+      mensajeTareas.innerHTML = ''
+    }
+    
+    
     if (element.estado == "completo") {
       checkbox.checked = true
     }else if (element.estado == "incompleto"){
       checkbox.checked = false
     }
-
-
-    checkbox.onclick = function agregarContador() {
-    
     if (checkbox.checked == true) {
       contador++
       // localStorage.setItem("contador",contador)
       parrafo.innerHTML = contador
-    }else if(checkbox.checked == false){
-      contador--
-      // localStorage.setItem("contador",contador)
-      parrafo.innerHTML = contador
     }
-    if(checkbox.checked == true){
-            estadoTarea = "completo"
-          }else if(checkbox.checked == false){
-            estadoTarea = "incompleto"
-          }
-      
-   putTask(checkbox.id, estadoTarea)
    
+ 
+
+    checkbox.onclick = function agregarContador() {
+      obtenerTareas()
+      if(checkbox.checked == true){
+        estadoTarea = "completo"
+      }else if(checkbox.checked == false){
+        estadoTarea = "incompleto"
+      }
+  
+      putTask(checkbox.id, estadoTarea)
+     
+      
     }
+    
 
       console.log(element.id)
       console.log(element.tarea)
@@ -98,6 +102,7 @@ async function obtenerTareas() {
     icon.src = "http://localhost:1234/compartimiento.97bc848e.png";
     icon.class = "icon"
     icon.addEventListener("click", () => {
+      window.location.reload()
       delTask(contenedor.id)//se debe meter el addevent listener dentro de la funcion 
       contador--
       getTask()
@@ -136,6 +141,7 @@ function addTask() {
      let tarea = document.createElement("p");//crea una eqtiqueta p
      tarea.innerHTML = inputTarea.value;//le va dar un valor al inner la etiqueta p
      
+     
  
      // let icon = document.createElement("img");
      // icon.src = "http://localhost:1234/compartimiento.97bc848e.png";
@@ -147,20 +153,13 @@ function addTask() {
      // contenedorPrincipal.appendChild(contenedor);
  
      postTask(inputTarea.value);
-     
-     
      inputTarea.value = ""//Devuelve el valor de input a "vacio"
-     
- 
-    
-     
-      
- 
-   }
+     }
  }
 
 btnAgreagar.addEventListener("click",function () {
   addTask()
+  obtenerTareas()
 
  
 })
