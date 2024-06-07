@@ -1,4 +1,4 @@
-import { postTask, getTask, delTask, putTask } from "./index.js";
+import { postTask, getTask, delTask, putTask, updateTask } from "./index.js";
 
 let inputTarea = document.getElementById("inputTarea");
 let btnAgreagar = document.getElementById("btnAgregar");
@@ -10,13 +10,6 @@ let contador = 0
 
 // let conte = localStorage.getItem("contador")
 // contador = conte
-console.log(contador)
-
-
-
-
-
-
 
 //funcion que obtiene las tareas usando los metodos de la api, ademas que inserta esas tareas en 
 // el div "contenedor principal"
@@ -49,8 +42,6 @@ async function obtenerTareas() {
       parrafo.innerHTML = contador
     }
    
- 
-
     checkbox.onclick = function agregarContador() {
       obtenerTareas()
       if(checkbox.checked == true){
@@ -60,9 +51,7 @@ async function obtenerTareas() {
       }
   
       putTask(checkbox.id, estadoTarea)
-     
-      
-    }
+     }
     
 
       console.log(element.id)
@@ -71,32 +60,16 @@ async function obtenerTareas() {
       console.log(checkbox.checked)
 
    
-  
-    
-   //funcion que va a utilizr un put para actualizar la data
-   
-    // checkbox.addEventListener("click", () => {
-    
-  //   if (checkbox.checked == true) {
-  //     contador++
-  //     localStorage.setItem("contador",contador)
-  //     parrafo.innerHTML = contador
-  //   }else if(checkbox.checked == false){
-  //     contador--
-  //     localStorage.setItem("contador",contador)
-  //     parrafo.innerHTML = contador
-  //   }
-  //   if(checkbox.checked == true){
-  //           estadoTarea = "completo"
-  //         }else if(checkbox.checked == false){
-  //           estadoTarea = "incompleto"
-  //         }
-      
-  //  putTask(checkbox.id, estadoTarea)//se debe meter el addevent listener dentro de la funcion
-  //  });
-/////////////////////////////////////////////////////////////////////
     let tarea = document.createElement("p");
     tarea.innerHTML = element.tarea;//el valor interno de tarea va a ser igual a la iteracion del elemento
+
+    let inputEdit = document.createElement("input")
+    inputEdit.type = "text"
+    inputEdit.id = element.id
+    inputId = element.id
+    inputEdit.class = "inputEdit"
+    inputText = inputEdit.value
+    console.log(inputText)
 
     let icon = document.createElement("img");
     icon.src = "http://localhost:1234/compartimiento.97bc848e.png";
@@ -106,10 +79,24 @@ async function obtenerTareas() {
       delTask(contenedor.id)//se debe meter el addevent listener dentro de la funcion 
       contador--
       getTask()
+
+      
     });
+    let iconEdit = document.createElement("img")
+      iconEdit.src = "http://localhost:1234/editar.94a5d5fd.png"
+      iconEdit.class = "iconEdit"
+    iconEdit.addEventListener("click", async () => {
+      console.log(inputText)
+      tarea.textContent = inputEdit.value
+      window.location.reload()
+      updateTask(inputId,inputEdit)
+
+    })
 
     contenedor.appendChild(checkbox);
     contenedor.appendChild(tarea);//bloque de codigo que implementa los append
+    contenedor.appendChild(inputEdit);
+    contenedor.appendChild(iconEdit)
     contenedor.appendChild(icon);//agrega las cosas al contenedor principal
     contenedorPrincipal.appendChild(contenedor);
   });
@@ -129,29 +116,11 @@ function addTask() {
    if (inputTarea.value.trim() == "") {
      alert("se debe ingresar texto");
    } else {
-     // let contenedor = document.createElement("div");
-     // contenedor.className = "contenedorTareas";//se se da ese classname para poder editarlo 
- 
-     // let checkbox = document.createElement("input");//creacion de un imput checkbox
-     // checkbox.type = "checkbox";
-     // checkbox.id = "checkbox";
-   
+     
 
- 
      let tarea = document.createElement("p");//crea una eqtiqueta p
      tarea.innerHTML = inputTarea.value;//le va dar un valor al inner la etiqueta p
      
-     
- 
-     // let icon = document.createElement("img");
-     // icon.src = "http://localhost:1234/compartimiento.97bc848e.png";
-     // icon.class = "icon";
- 
-     // contenedor.appendChild(checkbox);//le ingresa un checbox a los contenedores
-     // contenedor.appendChild(tarea);//le agrega el valor del input al contenedor "p"
-     // contenedor.appendChild(icon);
-     // contenedorPrincipal.appendChild(contenedor);
- 
      postTask(inputTarea.value);
      inputTarea.value = ""//Devuelve el valor de input a "vacio"
      }
@@ -166,9 +135,7 @@ btnAgreagar.addEventListener("click",function () {
 
 inputTarea.addEventListener("keydown",function (event) {
   if(event.keyCode == 13){
-
- 
-   addTask()
+  addTask()
   }
   
 })

@@ -81,5 +81,30 @@ try {
         console.log(error)
        } 
   }
-  export {postTask,getTask,delTask,putTask}
+  const updateTask = async (id,inputText) => {
+    try {
+          const response = await fetch(`http://localhost:3000/api/todo/${id}`, {
+           method: 'PUT',
+           headers: {
+             'Content-Type': 'application/json'
+             },
+             body: JSON.stringify({
+    
+               tarea: inputText.value,
+               
+          
+              })
+           });
+           const data = await response.json()
+           
+          // window.location.reload()
+           
+         } catch(error) {
+    
+    
+            alert("error")
+           } 
+      }
+
+  export {postTask,getTask,delTask,putTask,updateTask}
    

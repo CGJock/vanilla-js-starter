@@ -7,13 +7,13 @@
     display: flex;
     justify-content: space-between;
     background-color: red;
-    width: 300px;
+    width: 500px;
     height: 30px;
 }
 .contendorInputContador{
     display: flex;
 }
-.icon{
+.icon, .iconEdit{
     width: 36px;
     height: 36px;
 }
