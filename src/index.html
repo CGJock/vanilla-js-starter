@@ -8,18 +8,28 @@
 </head>
 
 <body>
-	<h1>La aplicación esta corriendo!</h1>
-	<h1>Lista de tareas</h1>
+	<h1>Tareas por hacer</h1>
 
-	
-	
+
+	<div class="contenidoPagina">
+
 	<div class="contendorInputContador">
-		<div><input id="inputTarea" type="text" placeholder="Ingrese la tarea por hacer"></div> <div><button  id="btnAgregar">Agregar Tarea</button></div> <p id="contadorTexto">0</p>
+		<div class="userInputs">
+			<div><input id="inputTarea" type="text" placeholder="Ingresar tarea"></div>
+			<div><button id="btnAgregar">Agregar Tarea</button></div>
+		</div>
+		<div class="contenedorContador">
+		<div class="contenedorContadorTextos"><p>tareas</p><p>completadas</p></div>
+		<div class="circulo"><p id="contadorTexto">0</p></div>
+	</div>
 	</div>
 
-		<div id="contenedorPrincipal" class="contenedorPrincipal">
-					<p id="mensajeTareas"> no hay tareas por hacer</p>
+	<div id="contenedorPrincipal" class="contenedorPrincipal">
+		<p id="mensajeTareas"> no hay tareas por hacer</p>
 	</div>
+
+</div>
+
 	<script src="indexBE.js" type="module"></script>
 
 </body>

@@ -8,8 +8,7 @@ let mensajeTareas = document.getElementById("mensajeTareas")
 
 let contador = 0
 
-// let conte = localStorage.getItem("contador")
-// contador = conte
+
 
 //funcion que obtiene las tareas usando los metodos de la api, ademas que inserta esas tareas en 
 // el div "contenedor principal"
@@ -38,7 +37,6 @@ async function obtenerTareas() {
     }
     if (checkbox.checked == true) {
       contador++
-      // localStorage.setItem("contador",contador)
       parrafo.innerHTML = contador
     }
    
@@ -61,12 +59,13 @@ async function obtenerTareas() {
 
    
     let tarea = document.createElement("p");
+    tarea.className = "tareaTexto"
     tarea.innerHTML = element.tarea;//el valor interno de tarea va a ser igual a la iteracion del elemento
 
     let inputEdit = document.createElement("input")
     inputEdit.type = "text"
     inputEdit.id = element.id
-    inputId = element.id
+    
     inputEdit.class = "inputEdit"
     inputText = inputEdit.value
     console.log(inputText)
@@ -83,13 +82,13 @@ async function obtenerTareas() {
       
     });
     let iconEdit = document.createElement("img")
+    
       iconEdit.src = "http://localhost:1234/editar.94a5d5fd.png"
       iconEdit.class = "iconEdit"
-    iconEdit.addEventListener("click", async () => {
-      console.log(inputText)
-      tarea.textContent = inputEdit.value
-      window.location.reload()
-      updateTask(inputId,inputEdit)
+      iconEdit.addEventListener("click", async () => {
+        console.log(element.id)
+      
+      updateTask(element.id,inputEdit.value)
 
     })
 

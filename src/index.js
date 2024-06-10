@@ -81,7 +81,7 @@ try {
         console.log(error)
        } 
   }
-  const updateTask = async (id,inputText) => {
+  const updateTask = async (id,inputEdit) => {
     try {
           const response = await fetch(`http://localhost:3000/api/todo/${id}`, {
            method: 'PUT',
@@ -90,14 +90,14 @@ try {
              },
              body: JSON.stringify({
     
-               tarea: inputText.value,
+               tarea: inputEdit,
                
           
               })
            });
            const data = await response.json()
            
-          // window.location.reload()
+          window.location.reload()
            
          } catch(error) {
     
