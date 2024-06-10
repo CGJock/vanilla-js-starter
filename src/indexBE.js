@@ -65,7 +65,7 @@ async function obtenerTareas() {
     let inputEdit = document.createElement("input")
     inputEdit.type = "text"
     inputEdit.id = element.id
-    
+    // prueba
     inputEdit.class = "inputEdit"
     inputText = inputEdit.value
     console.log(inputText)
