@@ -26,37 +26,30 @@ async function obtenerTareas() {
     checkbox.type = "checkbox";//bloque de codigo que crea el checkbox
     checkbox.id = element.id;
     if (contenedorPrincipal.innerHTML != '') {
-      mensajeTareas.innerHTML = ''
+      mensajeTareas.innerHTML = ''//logica para mostar o no mostar si hay tareas pendientes
     }
     
     
-    if (element.estado == "completo") {
-      checkbox.checked = true
+    if (element.estado == "completo") {//dependiendo del estado del elemento del objeto 
+      checkbox.checked = true         //ese sera el estado del check, lo que guarda su valor 
     }else if (element.estado == "incompleto"){
       checkbox.checked = false
     }
-    if (checkbox.checked == true) {
-      contador++
+    if (checkbox.checked == true) {//se revisan los elementos iterados, como solo pasa por los 
+      contador++                  //check en true no es necesario un contador --
       parrafo.innerHTML = contador
     }
    
     checkbox.onclick = function agregarContador() {
       obtenerTareas()
-      if(checkbox.checked == true){
-        estadoTarea = "completo"
+      if(checkbox.checked == true){//dependiendo del valor boleano del checkbox
+        estadoTarea = "completo"  //dependera  el estado de tarea que se envia a la api
       }else if(checkbox.checked == false){
         estadoTarea = "incompleto"
       }
   
-      putTask(checkbox.id, estadoTarea)
+      putTask(checkbox.id, estadoTarea)//se envian el id y el estado tarea
      }
-    
-
-      console.log(element.id)
-      console.log(element.tarea)
-      console.log(element.estado)
-      console.log(checkbox.checked)
-
    
     let tarea = document.createElement("p");
     tarea.className = "tareaTexto"
@@ -112,7 +105,7 @@ function addTask() {
  
    let inputTarea = document.getElementById("inputTarea");
 
-   if (inputTarea.value.trim() == "") {
+   if (inputTarea.value.trim() == "") {//verifica que no se pueda meter whitespace
      alert("se debe ingresar texto");
    } else {
      
@@ -134,8 +127,8 @@ btnAgreagar.addEventListener("click",function () {
 
 inputTarea.addEventListener("keydown",function (event) {
   if(event.keyCode == 13){
-  addTask()
-  }
+  addTask()//codigo keydown para habiliar el input con la tecla enter
+  }       //se utiliza ese en vez de keypress por ser menos anticuado 
   
 })
 
