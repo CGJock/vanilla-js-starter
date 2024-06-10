@@ -1,5 +1,5 @@
 import { postTask, getTask, delTask, putTask, updateTask } from "./index.js";
-
+//variables que se usaran para interactuar con la pagina
 let inputTarea = document.getElementById("inputTarea");
 let btnAgreagar = document.getElementById("btnAgregar");
 let contenedorPrincipal = document.getElementById("contenedorPrincipal");
@@ -12,8 +12,8 @@ let contador = 0
 
 //funcion que obtiene las tareas usando los metodos de la api, ademas que inserta esas tareas en 
 // el div "contenedor principal"
-async function obtenerTareas() {
-    
+async function obtenerTareas() {//esta funcion sirve para llamar los elementos de la api
+                                //y crear los elementos
     let datos = await getTask();
     datos.forEach((element) => {//for each usado para recorrer todos los datos del api
     let contenedor = document.createElement("div");
@@ -30,19 +30,19 @@ async function obtenerTareas() {
     }
     
     
-    if (element.estado == "completo") {
-      checkbox.checked = true
+    if (element.estado == "completo") {// revisa el estado del elemento  y en base 
+      checkbox.checked = true         //a como este se le cambia 
     }else if (element.estado == "incompleto"){
       checkbox.checked = false
     }
-    if (checkbox.checked == true) {
+    if (checkbox.checked == true) {//si encuentra un check activo, se incrementa el contador
       contador++
       parrafo.innerHTML = contador
     }
    
     checkbox.onclick = function agregarContador() {
       obtenerTareas()
-      if(checkbox.checked == true){
+      if(checkbox.checked == true){//revisa el estado del check para cambiar las propiedades del objeto 
         estadoTarea = "completo"
       }else if(checkbox.checked == false){
         estadoTarea = "incompleto"
@@ -51,12 +51,6 @@ async function obtenerTareas() {
       putTask(checkbox.id, estadoTarea)
      }
     
-
-      console.log(element.id)
-      console.log(element.tarea)
-      console.log(element.estado)
-      console.log(checkbox.checked)
-
    
     let tarea = document.createElement("p");
     tarea.className = "tareaTexto"
@@ -70,13 +64,13 @@ async function obtenerTareas() {
     inputText = inputEdit.value
     console.log(inputText)
 
-    let icon = document.createElement("img");
+    let icon = document.createElement("img");//bloque de codigo que crea la imagen y le da propiedades
     icon.src = "http://localhost:1234/compartimiento.97bc848e.png";
     icon.class = "icon"
     icon.addEventListener("click", () => {
       window.location.reload()
       delTask(contenedor.id)//se debe meter el addevent listener dentro de la funcion 
-      contador--
+      
       getTask()
 
       
@@ -88,7 +82,7 @@ async function obtenerTareas() {
       iconEdit.addEventListener("click", async () => {
         console.log(element.id)
       
-      updateTask(element.id,inputEdit.value)
+      updateTask(element.id,inputEdit.value)//se envian los prametros al api para ser actualizaodos
 
     })
 
@@ -109,11 +103,11 @@ obtenerTareas()
 
 
 function addTask() {
- 
+  //esta funcion envia los parametros del input al api
    let inputTarea = document.getElementById("inputTarea");
 
    if (inputTarea.value.trim() == "") {
-     alert("se debe ingresar texto");
+     alert("se debe ingresar texto");//valida que el usuario no pueda poner inputs vacios
    } else {
      
 
@@ -133,8 +127,8 @@ btnAgreagar.addEventListener("click",function () {
 })
 
 inputTarea.addEventListener("keydown",function (event) {
-  if(event.keyCode == 13){
-  addTask()
+  if(event.keyCode == 13){//funcion para hacer que el input funcione con la tecla enter
+  addTask()               //se usa keydown en vez de keypress por ser menos anticuado 
   }
   
 })
