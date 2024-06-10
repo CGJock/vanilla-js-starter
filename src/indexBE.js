@@ -13,7 +13,7 @@ let contador = 0
 //funcion que obtiene las tareas usando los metodos de la api, ademas que inserta esas tareas en 
 // el div "contenedor principal"
 async function obtenerTareas() {
-    
+    contenedorPrincipal.innerHTML = ""
     let datos = await getTask();
     datos.forEach((element) => {//for each usado para recorrer todos los datos del api
     let contenedor = document.createElement("div");
