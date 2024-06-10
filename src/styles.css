@@ -58,8 +58,8 @@ body{
 .contenedorPrincipal{
     overflow: scroll;/*propiedad para que el contenido del div no se rebalse*/
     height: 300px;
-    width: 600px;
-    border: solid lightgray 1px;
+    width: 605px;
+    border: solid lightgray 2px;
     
 }
 #mensajeTareas{
@@ -73,9 +73,12 @@ body{
 .contenedorTareas{
     display: flex;
     justify-content: space-between;
-    
-    width: 500px;
+    border: solid lightgrey 1px;
+    text-align: center;
+    width: 580px;
     height: 30px;
+    margin-left: 1.5%;
+    margin-bottom: 10px;
 }
 .contendorInputContador{
     width: 600px;
@@ -88,10 +91,9 @@ body{
 }
 .inputEdit{
    opacity: 0;
-    
 }
 .tareaTexto{
-    
+    margin-top: 1%;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
